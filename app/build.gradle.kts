@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.jignesh.gmailclone"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.jignesh.gmailclone"
