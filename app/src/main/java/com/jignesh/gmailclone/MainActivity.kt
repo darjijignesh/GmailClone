@@ -5,10 +5,13 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
@@ -20,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.jignesh.gmailclone.components.GmailDrawerMenu
 import com.jignesh.gmailclone.components.HomeAppBar
 import com.jignesh.gmailclone.ui.theme.GmailCloneTheme
 import kotlinx.coroutines.CoroutineScope
@@ -42,11 +46,12 @@ class MainActivity : ComponentActivity() {
 fun GmailUI() {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
+    val state = rememberScrollState()
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
-                // Drawer contents
+              GmailDrawerMenu(state)
             }
         },
         gesturesEnabled = true
@@ -57,8 +62,6 @@ fun GmailUI() {
 }
 @Composable
 fun ScreenContent(drawerState: DrawerState, scope: CoroutineScope){
-
-
     Scaffold(
         topBar = {
             HomeAppBar(modifier = Modifier.statusBarsPadding(),drawerState,scope)
